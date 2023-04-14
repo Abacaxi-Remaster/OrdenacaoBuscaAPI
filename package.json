@@ -1,0 +1,19 @@
+{
+  "name": "abacaxiremaster",
+  "version": "1.0.0",
+  "description": "API de ordenacao e busca",
+  "main": "/src/index.ts",
+  "scripts": {
+    "dev": "tsc node ./src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js"
+  },
+  "author": "abacaxiRemaster",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
