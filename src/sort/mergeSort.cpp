@@ -1,5 +1,10 @@
-int main()
+#include "../fileToArray.hpp"
+
+int main(int argc, char *argv[])
 {
+    int length = stoi(argv[1]);
+    int *array = fileToArray(length, "../array.csv");
+    mSort(array, 0, length - 1);
     return 0;
 }
 
