@@ -3,7 +3,7 @@ import * as fs from 'fs';
 const myArray = [1, 2, 3, 4, 5];
 arrayToFile(myArray);
 
-function arrayToFile(array: number[]): void {
+export function arrayToFile(array: number[]): void {
     const filename = 'array.csv';
     const stream = fs.createWriteStream(filename);
 

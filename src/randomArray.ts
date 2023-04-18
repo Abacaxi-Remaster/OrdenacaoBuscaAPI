@@ -1,3 +1,8 @@
+import { arrayToFile } from "./arrayToFile";
+
+var array = randomArray (100, 0, 10)
+arrayToFile(array);
+
 function randomArray(length: number, floor: number, ceil: number): number[] {
     var array: number[] = [];
     for (var i = 0; i < length; i++)
