@@ -1,9 +1,7 @@
 #include "swap.hpp"
 
-int main()
-{
-    return 0;
-}
+void qSort(int arr[], int start, int end);
+int partition(int *array, int l, int r);
 
 int partition(int *array, int l, int r)
 {
@@ -23,12 +21,12 @@ int partition(int *array, int l, int r)
     swap(array[i], array[r]);
     return i;
 }
-void qSort(int arr[], int l, int r)
+void qSort(int arr[], int start, int end)
 {
-    if (l < r)
+    if (start < end)
     {
-        int p = partition(arr, l, r);
-        qSort(arr, l, p - 1);
-        qSort(arr, p + 1, r);
+        int p = partition(arr, start, end);
+        qSort(arr, start, p - 1);
+        qSort(arr, p + 1, end);
     }
 }
