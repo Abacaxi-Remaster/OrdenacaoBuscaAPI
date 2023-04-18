@@ -1,5 +1,22 @@
-function arrayToFile(array: number[]): void 
-{
-    // TODO: Implement me!
-    // Implement a function that recieves an array and writes it in a .csv file
+import * as fs from 'fs';
+
+const myArray = [1, 2, 3, 4, 5];
+arrayToFile(myArray);
+
+function arrayToFile(array: number[]): void {
+    const filename = 'array.csv';
+    const stream = fs.createWriteStream(filename);
+
+    clearFile(filename);
+
+    // stream.write('Value\n'); // Add header row
+
+    const value = array.join(',');
+    stream.write(value);
+
+    stream.end();
+}
+
+function clearFile(filename: string): void {
+    fs.writeFileSync(filename, '');
 }
