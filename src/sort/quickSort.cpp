@@ -1,4 +1,5 @@
 #include "../fileToArray.hpp"
+#include "../qSort.hpp"
 
 int main(int argc, char *argv[])
 {
