@@ -9,3 +9,4 @@ ternarySearch
 mergeSort
 quickSort
 bubbleSort
+dist/*.js
