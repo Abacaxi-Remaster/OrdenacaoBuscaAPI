@@ -5,13 +5,28 @@ arrayToFile(array);
 
 const { exec } = require('child_process');
 
-exec("./search/binarySearch 100 3", (err: string, cout: string, cerr: string) => {
-    if (err) {
-        console.error("could not execute command: ", err);
-        return;
-    }
-    console.log("Output: \n", cout);
-    console.log("Errors: \n", cerr);
+const promise = new Promise((resolve, reject) => {
+    exec("g++ search/binarySearch.cpp -o search/binarySearch", (err: string, cout: string, cerr: string) => {
+        if (err) {
+            console.error("could not execute command: ", err);
+            return;
+        }
+        console.log("Output: \n", cout);
+        console.log("Errors: \n", cerr);
+        resolve(true);
+    })
+})
+
+
+promise.then((resolve) => {
+    exec("./search/binarySearch 100 3", (err: string, cout: string, cerr: string) => {
+        if (err) {
+            console.error("could not execute command: ", err);
+            return;
+        }
+        console.log("Output: \n", cout);
+        console.log("Errors: \n", cerr);
+    })
 })
 
 function randomArray(length: number, floor: number, ceil: number): number[] {
