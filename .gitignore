@@ -1,9 +1,11 @@
 *.js
 .vscode
-data/*
+data/
 settings.json
 *.exe
 
-*
-!/**/
-!*.*
+binarySearch
+ternarySearch
+mergeSort
+quickSort
+bubbleSort
