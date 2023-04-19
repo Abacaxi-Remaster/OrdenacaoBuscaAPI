@@ -8,7 +8,15 @@ const HOSTNAME = process.env.HOSTNAME || 'http://localhost'
 const app = express()
 // Endpoint raiz
 app.get('/', (req, res) => {
-    res.send('Funcionou!')
+    var fileName = "/home.html";
+    res.sendFile(__dirname + fileName, function (err) {
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('Sent:', fileName);
+        }
+    })
+    return;
 })
 // Cors
 app.use(cors({
