@@ -1,4 +1,9 @@
 *.js
 .vscode
-data/
+data/*
 settings.json
+*.exe
+
+*
+!/**/
+!*.*
