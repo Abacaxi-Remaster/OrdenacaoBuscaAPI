@@ -10,3 +10,5 @@ mergeSort
 quickSort
 bubbleSort
 dist/*.js
+dist/arrayToFile.js
+dist/index.js
