@@ -4,7 +4,7 @@ const myArray = [1, 2, 3, 4, 5];
 arrayToFile(myArray);
 
 export function arrayToFile(array: number[]): void {
-    const filename = 'array.csv';
+    const filename = 'data/array.csv';
     const stream = fs.createWriteStream(filename);
 
     clearFile(filename);

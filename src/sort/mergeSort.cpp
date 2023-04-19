@@ -1,10 +1,24 @@
 #include "../fileToArray.hpp"
+#include <chrono>
+using namespace std::chrono;
+void mSort(int *array, int start, int end);
 
 int main(int argc, char *argv[])
 {
     int length = stoi(argv[1]);
-    int *array = fileToArray(length, "array.csv");
+    int *array = fileToArray(length, "data/array.csv");
+
+    auto start = steady_clock::now();
+
     mSort(array, 0, length - 1);
+    
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    double tempo = time.count();
+
+    cout << tempo << endl;
+    
+    
     return 0;
 }
 

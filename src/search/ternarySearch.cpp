@@ -1,15 +1,26 @@
 #include "../fileToArray.hpp"
 #include "../qSort.hpp"
-
+#include <chrono>
 int tSearch(int *array, int value, int start, int end);
+
+using namespace std::chrono;
 
 int main(int argc, char *argv[])
 {
     int length = stoi(argv[1]);
     int value = stoi(argv[2]);
-    int *array = fileToArray(length, "../array.csv");
+    int *array = fileToArray(length, "data/array.csv");
     qSort(array, 0, length - 1);
-    cout << tSearch(array, value, 0, length - 1) << endl;
+
+    auto start = steady_clock::now();
+
+    int result = tSearch(array, value, 0, length - 1);
+
+    auto end = steady_clock::now();
+    duration<double, std::micro> time = end - start;
+    double tempo = time.count();
+
+    cout << tempo << endl;
     return 0;
 }
 
