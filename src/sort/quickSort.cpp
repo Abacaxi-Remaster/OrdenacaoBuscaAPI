@@ -6,7 +6,7 @@ using namespace std::chrono;
 int main(int argc, char *argv[])
 {
     int length = stoi(argv[1]);
-    int *array = fileToArray(length, "../array.csv");
+    int *array = fileToArray(length, "data/array.csv");
     qSort(array, 0, length - 1);
 
     auto start = steady_clock::now();

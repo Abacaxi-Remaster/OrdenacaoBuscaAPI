@@ -6,7 +6,7 @@ void mSort(int *array, int start, int end);
 int main(int argc, char *argv[])
 {
     int length = stoi(argv[1]);
-    int *array = fileToArray(length, "array.csv");
+    int *array = fileToArray(length, "data/array.csv");
 
     auto start = steady_clock::now();
 
