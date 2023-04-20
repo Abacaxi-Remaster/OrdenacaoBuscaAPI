@@ -33,41 +33,44 @@
 </style>
 
 <body class="corpo">
-    <form name="API">
-        <h1>Teste API ordenação e busca</h1>
-        <h2>Dados do vetor:</h2>
-        Tamanho:<input class=entrada type="number" name="size"></input><br>
-        Menor número possível: <input class=entrada type="number" name="limite_inferior"></input><br>
-        Maior número possível: <input class=entrada type="number" name="limite_superior"></input><br>
-        <input class=button type="button" name="botao" value="Testar" onclick="executar()"></input><br>
-        <h2>Resultados:</h2>
-        <table id="tbl" style="width:25%">
-            <tr>
-                <th>Algorítmo</th>
-                <th>Tempo</th>
-            </tr>
-            <tr>
-                <td>Binary Search</td>
-                <td id="1"></td>
-            </tr>
-            <tr>
-                <td>Ternary Search</td>
-                <td id="2"></td>
-            </tr>
-            <tr>
-                <td>Quick Sort</td>
-                <td id="3"></td>
-            </tr>
-            <tr>
-                <td>Merge Sort</td>
-                <td id="4"></td>
-            </tr>
-            <tr>
-                <td>Bubble Sort</td>
-                <td id="5"></td>
-            </tr>
-        </table>
+
+    <h1>Teste API ordenação e busca</h1>
+    <h2>Dados do vetor:</h2>
+    <form name="API" action="http://localhost:4000/run" method="POST">
+        Tamanho:<input class=entrada type="number" name="length"></input><br>
+        Menor número possível: <input class=entrada type="number" name="floor"></input><br>
+        Maior número possível: <input class=entrada type="number" name="ceil"></input><br>
+
+        <button type="submit">Testar</button>
     </form>
+    <h2>Resultados:</h2>
+    <table id="tbl" style="width:25%">
+        <tr>
+            <th>Algoritmo</th>
+            <th>Tempo</th>
+        </tr>
+        <tr>
+            <td>Binary Search</td>
+            <td id="1"></td>
+        </tr>
+        <tr>
+            <td>Ternary Search</td>
+            <td id="2"></td>
+        </tr>
+        <tr>
+            <td>Quick Sort</td>
+            <td id="3"></td>
+        </tr>
+        <tr>
+            <td>Merge Sort</td>
+            <td id="4"></td>
+        </tr>
+        <tr>
+            <td>Bubble Sort</td>
+            <td id="5"></td>
+        </tr>
+    </table>
+
 </body>
 
 </html>
