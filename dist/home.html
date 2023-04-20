@@ -10,6 +10,34 @@
 </head>
 <script>
     //Funcao única: envia valores para API e atualiza a tabela com o retorno
+
+    function run() {
+        console.log("entrou")
+        var length = parseInt(document.getElementById("a").value);
+        var floor = parseInt(document.getElementById("b").value);
+        var ceil = parseInt(document.getElementById("c").value);
+
+        const postData = async (url = '', data = {}) => {
+            const res = await fetch(url, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+            console.log(res);
+            try {
+                const received = await res.json();
+                console.log(received);
+                return received;
+            }
+            catch (error) {
+                console.log('ERROR: ' + error);
+            }
+        };
+        postData('http://localhost:4000/run', { length: length, floor: floor, ceil: ceil });
+    }
     function executar() {
         var size = document.API.size.value;
         var limite_inferior = document.API.limite_inferior.value;
@@ -36,13 +64,13 @@
 
     <h1>Teste API ordenação e busca</h1>
     <h2>Dados do vetor:</h2>
-    <form name="API" action="http://localhost:4000/run" method="POST">
-        Tamanho:<input class=entrada type="number" name="length"></input><br>
-        Menor número possível: <input class=entrada type="number" name="floor"></input><br>
-        Maior número possível: <input class=entrada type="number" name="ceil"></input><br>
+    <!-- <form name="API" action="http://localhost:4000/run" method="POST"> -->
+    Tamanho:<input class=entrada type="number" name="length" id="a"></input><br>
+    Menor número possível: <input class=entrada type="number" name="floor" id="b"></input><br>
+    Maior número possível: <input class=entrada type="number" name="ceil" id="c"></input><br>
 
-        <button type="submit">Testar</button>
-    </form>
+    <button type="button" onclick="run()">Testar</button>
+    <!-- </form> -->
     <h2>Resultados:</h2>
     <table id="tbl" style="width:25%">
         <tr>

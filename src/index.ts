@@ -43,35 +43,32 @@ app.post('/run', (req, res) => {
     var floor = req.body.floor;
     var ceil = req.body.ceil;
     var array = randomArray(length, floor, ceil);
-    var tempos: string[];
     arrayToFile(array);
 
     var p = new Promise((resolve, reject) => {
         exec("./src/search/binarySearch " + length + " " + randomNumber(floor, ceil), function (err: string, cout0: string, cerr: string) {
-            tempos[0] = cout0;
+            console.log(cout0);
         });
 
         exec("./src/search/ternarySearch " + length + " " + randomNumber(floor, ceil), function (err: string, cout1: string, cerr: string) {
-            tempos[1] = cout1;
+            console.log(cout1);
         });
 
         exec("./src/sort/quickSort " + length, function (err: string, cout2: string, cerr: string) {
-            tempos[2] = cout2;
+            console.log(cout2);
         });
 
         exec("./src/sort/mergeSort " + length, function (err: string, cout3: string, cerr: string) {
-            tempos[3] = cout3;
+            console.log(cout3);
         });
-        exec("./src/sort/bubbleSort " + length, function (err: string, cout4: string, cerr: string) {
-            tempos[4] = cout4;
-        });
+        exec("./src/sort/bubb1eS" + length, function (err: string, cout4: string, cerr: string) {
+            console.log(cout4);        });
     });
 
     p.then(function (resolve) {
-        const value = tempos.join(',');
-        res.send(value);
+        res.send("oi");
     });
-    res.end();
+    res.send("terminou");
 })
 
 // Cors

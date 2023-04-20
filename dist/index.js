@@ -47,30 +47,28 @@ app.post('/run', (req, res) => {
     var floor = req.body.floor;
     var ceil = req.body.ceil;
     var array = (0, randomArray_1.randomArray)(length, floor, ceil);
-    var tempos;
     (0, arrayToFile_1.arrayToFile)(array);
     var p = new Promise((resolve, reject) => {
         exec("./src/search/binarySearch " + length + " " + (0, randomArray_1.randomNumber)(floor, ceil), function (err, cout0, cerr) {
-            tempos[0] = cout0;
+            console.log(cout0);
         });
         exec("./src/search/ternarySearch " + length + " " + (0, randomArray_1.randomNumber)(floor, ceil), function (err, cout1, cerr) {
-            tempos[1] = cout1;
+            console.log(cout1);
         });
         exec("./src/sort/quickSort " + length, function (err, cout2, cerr) {
-            tempos[2] = cout2;
+            console.log(cout2);
         });
         exec("./src/sort/mergeSort " + length, function (err, cout3, cerr) {
-            tempos[3] = cout3;
+            console.log(cout3);
         });
-        exec("./src/sort/bubbleSort " + length, function (err, cout4, cerr) {
-            tempos[4] = cout4;
+        exec("./src/sort/bubb1eS" + length, function (err, cout4, cerr) {
+            console.log(cout4);
         });
     });
     p.then(function (resolve) {
-        const value = tempos.join(',');
-        res.send(value);
+        res.send("oi");
     });
-    res.end();
+    res.send("terminou");
 });
 // Cors
 app.use((0, cors_1.default)({
