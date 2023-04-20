@@ -1,33 +1,47 @@
 import { arrayToFile } from "./arrayToFile";
 
-var array = randomArray(100, 0, 10);
+
+var array = randomArray(100000, 0, 10000);
+var qntNumerosArray = "100000";
+var acharNumero = "5";
+var arrayPromises = [];
+var vetorDosAlgoritmos = ['search/binarySearch', 'search/ternarySearch'];
+
 arrayToFile(array);
 
 const { exec } = require('child_process');
 
-const promise = new Promise((resolve, reject) => {
-    exec("g++ search/binarySearch.cpp -o search/binarySearch", (err: string, cout: string, cerr: string) => {
-        if (err) {
-            console.error("could not execute command: ", err);
-            return;
-        }
-        console.log("Output: \n", cout);
-        console.log("Errors: \n", cerr);
-        resolve(true);
-    })
-})
 
 
-promise.then((resolve) => {
-    exec("./search/binarySearch 100 3", (err: string, cout: string, cerr: string) => {
-        if (err) {
-            console.error("could not execute command: ", err);
-            return;
-        }
-        console.log("Output: \n", cout);
-        console.log("Errors: \n", cerr);
-    })
-})
+for (var i = 0; i < 2; i++) {
+    var arrayAuxiliar = vetorDosAlgoritmos[i];
+    console.log("g++ " + arrayAuxiliar + ".cpp -o " + arrayAuxiliar);
+    arrayPromises[i] = new Promise((resolve, reject) => {
+        exec("g++ " + arrayAuxiliar + ".cpp -o " + arrayAuxiliar, function (err: string, cout: string, cerr: string) {
+            if (err) {
+                console.error("could not execute command: ", err);
+                return;
+            }
+            resolve(true);
+        });
+    });
+
+}
+
+for (var i = 0; i < 2; i++) {
+    var arrayAuxiliar = vetorDosAlgoritmos[i];
+    arrayPromises[i].then(function (resolve) {
+        exec("./" + arrayAuxiliar + " " + qntNumerosArray + " " + acharNumero, function (err: string, cout: string, cerr: string) {
+            if (err) {
+                console.error("could not execute command: ", err);
+                return;
+            }
+            console.log("Output: " + i + " \n", cout);
+            console.log("Errors: \n", cerr);
+        });
+
+    });
+}
 
 function randomArray(length: number, floor: number, ceil: number): number[] {
     var array: number[] = [];
