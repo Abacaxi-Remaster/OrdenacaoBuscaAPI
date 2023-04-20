@@ -19,11 +19,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.arrayToFile = void 0;
 const fs = __importStar(require("fs"));
 const myArray = [1, 2, 3, 4, 5];
 arrayToFile(myArray);
 function arrayToFile(array) {
-    const filename = 'array.csv';
+    const filename = 'src/data/array.csv';
     const stream = fs.createWriteStream(filename);
     clearFile(filename);
     // stream.write('Value\n'); // Add header row
@@ -31,6 +32,8 @@ function arrayToFile(array) {
     stream.write(value);
     stream.end();
 }
+exports.arrayToFile = arrayToFile;
 function clearFile(filename) {
     fs.writeFileSync(filename, '');
 }
+//# sourceMappingURL=arrayToFile.js.map

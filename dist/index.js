@@ -5,16 +5,72 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const randomArray_1 = require("./randomArray");
+const arrayToFile_1 = require("./arrayToFile");
+const { exec } = require('child_process');
 // Porta do servidor
 const PORT = process.env.PORT || 4000;
 // Host do servidor
 const HOSTNAME = process.env.HOSTNAME || 'http://localhost';
 // App Express
 const app = (0, express_1.default)();
-// Endpoint raiz
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+// endpoint raiz
 app.get('/', (req, res) => {
-    
-    res.send('Funcionou!');
+    var fileName = "/home.html";
+    res.sendFile(__dirname + fileName, function (err) {
+        if (err) {
+            console.error(err);
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+    return;
+});
+// endpoint raiz
+app.get('/favicon.ico', (req, res) => {
+    var fileName = "/favicon.ico";
+    res.sendFile(__dirname + fileName, function (err) {
+        if (err) {
+            console.error(err);
+        }
+        else {
+            console.log('Sent:', fileName);
+        }
+    });
+    return;
+});
+app.post('/run', (req, res) => {
+    var length = req.body.length;
+    var floor = req.body.floor;
+    var ceil = req.body.ceil;
+    var array = (0, randomArray_1.randomArray)(length, floor, ceil);
+    var tempos;
+    (0, arrayToFile_1.arrayToFile)(array);
+    var p = new Promise((resolve, reject) => {
+        exec("./src/search/binarySearch " + length + " " + (0, randomArray_1.randomNumber)(floor, ceil), function (err, cout0, cerr) {
+            tempos[0] = cout0;
+        });
+        exec("./src/search/ternarySearch " + length + " " + (0, randomArray_1.randomNumber)(floor, ceil), function (err, cout1, cerr) {
+            tempos[1] = cout1;
+        });
+        exec("./src/sort/quickSort " + length, function (err, cout2, cerr) {
+            tempos[2] = cout2;
+        });
+        exec("./src/sort/mergeSort " + length, function (err, cout3, cerr) {
+            tempos[3] = cout3;
+        });
+        exec("./src/sort/bubbleSort " + length, function (err, cout4, cerr) {
+            tempos[4] = cout4;
+        });
+    });
+    p.then(function (resolve) {
+        const value = tempos.join(',');
+        res.send(value);
+    });
+    res.end();
 });
 // Cors
 app.use((0, cors_1.default)({
@@ -22,9 +78,11 @@ app.use((0, cors_1.default)({
 }));
 // Resposta padrão para quaisquer outras requisições:
 app.use((req, res) => {
+    console.log(req);
     res.status(404);
 });
 // Inicia o sevidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando com sucesso ${HOSTNAME}:${PORT}`);
 });
+//# sourceMappingURL=index.js.map

@@ -1,5 +1,8 @@
 import express from 'express'
 import cors from 'cors'
+import { randomArray, randomNumber } from './randomArray'
+import { arrayToFile } from './arrayToFile'
+const { exec } = require('child_process');
 // Porta do servidor
 const PORT = process.env.PORT || 4000
 // Host do servidor
@@ -36,7 +39,38 @@ app.get('/favicon.ico', (req, res) => {
 })
 
 app.post('/run', (req, res) => {
-    console.log("Teste");
+    var length = req.body.length;
+    var floor = req.body.floor;
+    var ceil = req.body.ceil;
+    var array = randomArray(length, floor, ceil);
+    var tempos: string[];
+    arrayToFile(array);
+
+    var p = new Promise((resolve, reject) => {
+        exec("./src/search/binarySearch " + length + " " + randomNumber(floor, ceil), function (err: string, cout0: string, cerr: string) {
+            tempos[0] = cout0;
+        });
+
+        exec("./src/search/ternarySearch " + length + " " + randomNumber(floor, ceil), function (err: string, cout1: string, cerr: string) {
+            tempos[1] = cout1;
+        });
+
+        exec("./src/sort/quickSort " + length, function (err: string, cout2: string, cerr: string) {
+            tempos[2] = cout2;
+        });
+
+        exec("./src/sort/mergeSort " + length, function (err: string, cout3: string, cerr: string) {
+            tempos[3] = cout3;
+        });
+        exec("./src/sort/bubbleSort " + length, function (err: string, cout4: string, cerr: string) {
+            tempos[4] = cout4;
+        });
+    });
+
+    p.then(function (resolve) {
+        const value = tempos.join(',');
+        res.send(value);
+    });
     res.end();
 })
 
